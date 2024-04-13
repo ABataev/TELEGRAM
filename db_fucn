@@ -34,32 +34,32 @@ def list_memory(chID):
 
 
 # Добавить запланированный фильм
-def add_memory(chID, name, usID):
+def add_memory(chID, usID, name):
     cur.execute(f'INSERT INTO list(user_id, name, ID_chat) VALUES({usID}, {name}, {chID}')
     con.commit()
 
 
 # Удаление запланированного фильма
-def remove_memory(chID, name, usID):
+def remove_memory(chID, usID, name):
     cur.execute(f'DELETE FROM list WHERE name = {name} AND user_id = {usID} AND ID_chat = {chID}')
     con.commit()
 
 
 # Добавить уведомление к фильму
-def add_notification(chID, name, usID):
+def add_notification(chID, usID, name):
     cur.execute(f'INSERT INTO notification(user_id, name, ID_chat) VALUES({usID}, {name}, {chID}')
     con.commit()
 
 
 # Удаление запланированного фильма
-def remove_notification(chID, name, usID):
+def remove_notification(chID, usID, name):
     cur.execute(f'DELETE FROM notification WHERE name = {name} AND user_id = {usID} AND ID_chat = {chID}')
     con.commit()
 
 
 # Возвращение любимых жанров пользователя
 def top_ganre_user(chID, usID):
-    res = cur.execute(f'SELECT score, genre FROM score WHERE ID_chat = {chID} AND id = {usID}').fetchall()
+    res = cur.execute(f'SELECT score, genre FROM score WHERE ID_chat = {chID} AND user_id = {usID}').fetchall()
     res.sort(reverse=True)
     top_genre = []
     for score, genre in res:
@@ -87,3 +87,8 @@ def top_list_b():
             break
     return res_sp
 
+
+# Выдать список запланированных фильмов, серий и т.д
+def get_notif_film(chID, usID):
+    res = cur.execute(f'SELECT name, ID_chat FROM notification WHERE user_id = {usID} AND ID_chat = {chID}').fetchall()
+    return res
