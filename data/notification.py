@@ -13,7 +13,6 @@ class Notification(SqlAlchemyBase):
                                 )
 
     chat_id = sqlalchemy.Column(sqlalchemy.Integer,
-        )
+                                )
 
-    film_name = sqlalchemy.Column(sqlalchemy.String)
-
+    film_id = sqlalchemy.Column(sqlalchemy.Integer)

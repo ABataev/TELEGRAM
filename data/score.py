@@ -2,6 +2,7 @@ import sqlalchemy
 from sqlalchemy import orm
 from .db_session import SqlAlchemyBase
 
+
 class Score(SqlAlchemyBase):
     __tablename__ = 'score'
 
@@ -14,10 +15,8 @@ class Score(SqlAlchemyBase):
     chat_id = sqlalchemy.Column(sqlalchemy.Integer,
                                 )
 
-    film_name = sqlalchemy.Column(sqlalchemy.String)
+    film_id = sqlalchemy.Column(sqlalchemy.Integer)
 
     score = sqlalchemy.Column(sqlalchemy.Integer)
 
     genre = sqlalchemy.Column(sqlalchemy.String)
-
-
