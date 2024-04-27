@@ -169,10 +169,10 @@ def add_to_memory(msg):
         KinoMan.send_message(msg.chat.id, f'=======================', parse_mode='html')
         KinoMan.send_message(msg.chat.id, f'Number {ID_kino}', parse_mode='html')
         KinoMan.send_message(msg.chat.id, '====Постер====', parse_mode='html')
-        if 'poster' in kin:
-            if 'url' in kin['poster']:
-                if kin['poster']['url']:
-                    KinoMan.send_photo(msg.chat.id, kin["poster"]["url"], parse_mode='html')
+        if 'poster' in kino:
+            if 'url' in kino['poster']:
+                if kino['poster']['url']:
+                    KinoMan.send_photo(msg.chat.id, kino["poster"]["url"], parse_mode='html')
                 else:
                     KinoMan.send_message(msg.chat.id, 'Постер отсутствует', parse_mode='html')
 
@@ -226,8 +226,8 @@ def add_to_notif(msg):
         KinoMan.send_message(msg.chat.id, f'=======================', parse_mode='html')
         KinoMan.send_message(msg.chat.id, f'Number {ID_kino}', parse_mode='html')
         KinoMan.send_message(msg.chat.id, '====Постер====', parse_mode='html')
-        if 'poster' in kin:
-            if 'url' in kin['poster']:
+        if 'poster' in kino:
+            if 'url' in kino['poster']:
                 if kino['poster']['url']:
                     KinoMan.send_photo(msg.chat.id, kino["poster"]["url"], parse_mode='html')
                 else:
@@ -241,7 +241,7 @@ def add_to_notif(msg):
 
 @KinoMan.message_handler(commands=['top_movie'])
 def ShowTopMovie(msg):
-    response = requests.get(f'{req}?limit=10&type=movie&rating.kp=8.5-10&{key}')
+    response = requests.get(f'{req}?limit=5&type=movie&rating.kp=8.5-10&{key}')
     response = json.loads(response.content)
     top = 0
     for kino in response['docs']:
@@ -268,7 +268,7 @@ def ShowTopMovie(msg):
 
 @KinoMan.message_handler(commands=['top_cartoon'])
 def ShowTopCartoon(msg):
-    response = requests.get(f'{req}?limit=10&type=cartoon&rating.kp=8.5-10&{key}')
+    response = requests.get(f'{req}?limit=5&type=cartoon&rating.kp=8.5-10&{key}')
     response = json.loads(response.content)
     top = 0
     for kino in response['docs']:
@@ -278,7 +278,6 @@ def ShowTopCartoon(msg):
         if 'poster' in kino:
             if 'url' in kino['poster']:
                 if kino['poster']['url']:
-                    pprint(kino)
                     KinoMan.send_photo(msg.chat.id, kino["poster"]["url"], parse_mode='html')
                 else:
                     KinoMan.send_message(msg.chat.id, 'Постер отсутствует', parse_mode='html')
@@ -296,7 +295,7 @@ def ShowTopCartoon(msg):
 
 @KinoMan.message_handler(commands=['top_series'])
 def ShowTopSeries(msg):
-    response = requests.get(f'{req}?limit=10&type=tv-series&rating.kp=8.5-10&{key}')
+    response = requests.get(f'{req}?limit=5&type=tv-series&rating.kp=8.5-10&{key}')
     response = json.loads(response.content)
     top = 0
     for kino in response['docs']:
@@ -323,7 +322,7 @@ def ShowTopSeries(msg):
 
 @KinoMan.message_handler(commands=['top_animated_series'])
 def ShowTopAnimatedSeries(msg):
-    response = requests.get(f'{req}?limit=10&type=animated-series&rating.kp=8.5-10&{key}')
+    response = requests.get(f'{req}?limit=5&type=animated-series&rating.kp=8.5-10&{key}')
     response = json.loads(response.content)
     top = 0
     for kino in response['docs']:
@@ -350,7 +349,7 @@ def ShowTopAnimatedSeries(msg):
 
 @KinoMan.message_handler(commands=['top_anime'])
 def ShowTopAnime(msg):
-    response = requests.get(f'{req}?limit=10&type=anime&rating.kp=8.5-10&{key}')
+    response = requests.get(f'{req}?limit=5&type=anime&rating.kp=8.5-10&{key}')
     response = json.loads(response.content)
     top = 0
     for kino in response['docs']:
@@ -450,5 +449,6 @@ def LeftMessage(msg):
 
     else:
         KinoMan.send_message(msg.chat.id, 'Я бы и рад с вами поболтать, <b>Босс</b>, но давайте перейдем к делу. Дайте мне команду. Не знаете какую? Используйте /help!', parse_mode='html')
+
 
 KinoMan.polling(none_stop=True)
